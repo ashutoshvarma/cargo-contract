@@ -16,10 +16,7 @@
 
 use anyhow::Result;
 use clap::Args;
-use std::{
-    convert::TryFrom,
-    fmt,
-};
+use std::{convert::TryFrom, fmt};
 
 #[derive(Default, Clone, Debug, Args)]
 pub struct VerbosityFlags {
@@ -190,10 +187,10 @@ impl Target {
         }
     }
 
-    /// Target specific flags to be set to `RUSTFLAGS` while building.
+    /// Target specific flags to be set to `CARGO_ENCODED_RUSTFLAGS` while building.
     pub fn rustflags(&self) -> &'static str {
         match self {
-            Self::Wasm => "-C link-arg=-zstack-size=65536 -C link-arg=--import-memory -Clinker-plugin-lto -C target-cpu=mvp",
+            Self::Wasm => "-C\x1flink-arg=-zstack-size=65536\x1f-C\x1flink-arg=--import-memory\x1f-Clinker-plugin-lto\x1f-C\x1ftarget-cpu=mvp",
             Self::RiscV => "-Clinker-plugin-lto",
         }
     }
