@@ -5684,6 +5684,7 @@ dependencies = [
  "cc",
  "cxx",
  "cxx-build",
+ "regex",
 ]
 
 [[package]]
